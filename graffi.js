@@ -73,7 +73,7 @@
 	Graffi.IteratorFactory.create1DIteratorFrom1DArray = function( data ) {
 		var labels = [],
 			l = data.length;
-			colors = Graffi.IteratorFactory.generateColorsArray( l );
+			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
 		colors.length = l;
 		return new Graffi.Iterator1D( data, labels, colors );
@@ -82,7 +82,7 @@
 	Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray = function( data ) {
 		var labels = [],
 			l = data.length;
-			colors = Graffi.IteratorFactory.generateColorsArray( l );
+			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
 		colors.length = l;
 		return new Graffi.Iterator1dMulti( data, labels, colors );
@@ -120,8 +120,57 @@
   		colorsList = colorsList.concat(colorsList);
   		colorsList.splice( l, 1000 );
   		return colorsList;
+	};
+	
+	var hues8 = [ 0, 32, 64, 96, 128, 160, 192, 224];
+	Graffi.IteratorFactory.generateWheelColors = function( l ) {
+		var i;
+		var valueRolls = l / 8;
+		var generatedColors = [];
+		
+		generatedColors.length = l;
+		
+		for ( i=0; i<l ; i++ ) {
+			generatedColors[i] = Graffi.hsl2rgb( hues8[ i%8 ], 255, 180- ( i*100/(valueRolls*8) )  );
+		}
+		
+		return generatedColors;
 	}
 	
+	/**
+	 *
+	 * implemented from http://en.wikipedia.org/wiki/HSL_color_space#From_HSL
+	 * @param   Number  h       The hue
+	 * @param   Number  s       The saturation
+	 * @param   Number  l       The lightness
+	 * @return  Array           The RGB representation
+	 */
+	Graffi.hsl2rgb = function( h, s, l) {
+		var chroma;
+		var hue360 = h*360/256;
+		var light1 = l/256;
+		var sat1 = s/256;
+		var hp;
+		var m;
+		var x;
+		
+		chroma = ( 1-Math.abs( 2*light1-1 ) ) * sat1 ;
+		hp =hue360/60;		
+		m = light1 - chroma/2;
+		x = Math.floor( ( (chroma * ( 1-Math.abs( hp%2-1 ) )) +m)*256 ); ;		
+		chroma = Math.floor( (chroma+m)*256 );
+		m = Math.floor( m*256 )
+
+		hp = Math.floor(hp);
+		switch(hp) {
+		case 0: return 'rgb('+[chroma,x,m]+')';
+		case 1: return 'rgb('+[x,chroma,m]+')';
+		case 2: return 'rgb('+[m,chroma,x]+')';
+		case 3: return 'rgb('+[m,x,chroma]+')';
+		case 4: return 'rgb('+[x,m,chroma]+')';
+		case 5: return 'rgb('+[chroma,m,x]+')';
+		}
+	};
 	
 	
 
