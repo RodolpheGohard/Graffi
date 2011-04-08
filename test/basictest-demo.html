@@ -18,16 +18,33 @@
 		color: #EEF;
 		background-color: Black;
 	}
+	#holder1, #holder2, #holder3, #holder4 {
+		width: 400px;
+		float: left;
+	}
+	#chartsDemo {
+		width: 822px;
+		margin: 50px auto;
+		
+	}
 </style>
 
 </head>
 <body>
-	<div id="holder" style="border:1px solid Black;">
-		here comes the stuff
-		<script type="text/javascript">
-			//var g = Graffi( 'holder', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:800,h:400} );
-			var g = Graffi( 'holder', [0.3,2,4,0,0,1,1,6,1,6,1], {w:800,h:400} );
-		</script>
+	<div id="chartsDemo">
+		<div id="holder1" style="border:1px solid Black;">
+		</div>
+		<div id="holder2" style="border:1px solid Black;">
+		</div>
+		<div id="holder3" style="border:1px solid Black;">
+		</div>
+		<div id="holder4" style="border:1px solid Black;">
+		</div>
 	</div>
+	<script type="text/javascript">
+		var g = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], {w:400,h:300} );
+		var g = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line"} );
+		var g = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
+	</script>
 </body>
 </html>
