@@ -17,20 +17,34 @@
 	body {
 		color: #EEF;
 		background-color: Black;
+		font-family: Ubuntu, sans-serif;
+	}
+	h1 {
+		color: White;
+	}
+	h2 {
+		color: #DDD;
 	}
 	#holder1, #holder2, #holder3, #holder4 {
 		width: 400px;
+		height: 333px;
 		float: left;
 	}
 	#chartsDemo {
 		width: 822px;
 		margin: 50px auto;
-		
+		/*background-color: #AAB;*/
+	}
+	.clear {
+		clear: both;
+		visibility: hidden;
 	}
 </style>
 
 </head>
 <body>
+	<h1>Here, Graffi examples: bar, line, multiple bars</h1>
+	<h2>look at the code</h2>
 	<div id="chartsDemo">
 		<div id="holder1" style="border:1px solid Black;">
 		</div>
@@ -40,6 +54,7 @@
 		</div>
 		<div id="holder4" style="border:1px solid Black;">
 		</div>
+		<hr class="clear" />
 	</div>
 	<script type="text/javascript">
 		var g = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], {w:400,h:300} );
