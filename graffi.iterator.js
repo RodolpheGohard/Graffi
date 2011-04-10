@@ -36,6 +36,7 @@
 		
 		this.get = function( n ) {
 			var voidarray = [];
+			var rvalue;
 			voidarray.length = data[n].length;
 			//Maybe cache this returned object
 			return {
@@ -47,6 +48,17 @@
 		this.next = function() {
 			if (this.index == this.length) return null;
 			return this.get(this.index++);
+		}
+		this.max = function() {
+			if ( this.maxValue === undefined ) {
+				for (var i=0;i<this.length;i++) {
+					for (var j=0;j<data[i].length;j++) {
+						if ( !(data[i][j] < this.maxValue) )
+							this.maxValue = data[i][j];
+					}
+				}
+			}
+			return this.maxValue;
 		}
 	}
 	

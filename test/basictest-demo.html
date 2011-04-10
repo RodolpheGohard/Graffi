@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Graffi test - demo</title>
+
+<script type="text/javascript" src="../lib/raphael.js"></script>
+
+<script type="text/javascript" src="../graffi.js"></script>
+<script type="text/javascript" src="../graffi.iterator.js"></script>
+<script type="text/javascript" src="../graffi.chart.js"></script>
+<script type="text/javascript" src="../graffi.pie.js"></script>
+<script type="text/javascript" src="../graffi.line.js"></script>
+<script type="text/javascript" src="../graffi.bar.js"></script>
+
+<style>
+	body {
+		color: #EEF;
+		background-color: Black;
+		font-family: Ubuntu, sans-serif;
+	}
+	h1 {
+		color: White;
+	}
+	h2 {
+		color: #DDD;
+	}
+	#holder1, #holder2, #holder3, #holder4 {
+		width: 400px;
+		height: 333px;
+		float: left;
+	}
+	#chartsDemo {
+		width: 822px;
+		margin: 50px auto;
+		/*background-color: #AAB;*/
+	}
+	.clear {
+		clear: both;
+		visibility: hidden;
+	}
+</style>
+
+</head>
+<body>
+	<h1>Here, Graffi examples: bar, line, multiple bars and pie</h1>
+	<h2>look at the code</h2>
+	<div id="chartsDemo">
+		<div id="holder1" style="border:1px solid Black;">
+		</div>
+		<div id="holder2" style="border:1px solid Black;">
+		</div>
+		<div id="holder3" style="border:1px solid Black;">
+		</div>
+		<div id="holder4" style="border:1px solid Black;">
+		</div>
+		<hr class="clear" />
+	</div>
+	<script type="text/javascript">
+		var g = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], {w:400,h:300} ); //default chartType is bars
+		var g = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line"} );
+		var g = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
+		var g = Graffi( 'holder4', [23,30,12,30,10,26], {w:400,h:300,chartType:"pie"} );
+	</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-/**
+/*
  * @author Rodolphe Gohard
  */
 
@@ -6,14 +6,30 @@
 (function() {
 	
 	/**
-	 * Graffi is both the namespace object and like a façade to create charts
+	 * Graffi is both the namespace object and like a 'façade' to create charts
+	 * @method Graffi
+	 * @param block where to create the space to hold graphics. Can be an Id, an HTML element,
+	 * or an already intaciated Raphael Paper.
+	 * @data the data to be drawn. Graffi accepts multiple kind of data and will try to detect
+	 * how they are formed: 1d array, 2d array, sets of points, and consequently which type of 
+	 * chart bests suits your data ... Those detections mechanisms can be disabled/forced with
+	 * some options to set in parameters.
+	 * @options options give you lot of controls to customize the rendering of your charts
+	 * Here's what you can specify:
+	 * .width
+	 * .height
+	 * .chartType
+	 * You can alors specify extra options as they will be passed to the Chart constructor.
+	 * please refer to each Chart's class documentation to read about them.
+	 * 
 	 */
-	var Graffi = function( block, data, parameters ) {
+	var Graffi = function( block, data, options ) {
 		
 		var holder,
 			width,
 			height,
-			iterator;
+			iterator,
+			parameters= options;
 		
 		//Sanitizing parameters
 		parameters = parameters || {};
@@ -37,6 +53,7 @@
 			holder = block;
 		}
 		
+		//We try to guess how data is formed. An iterator over the dataset is generated.
 		if ( data.length ) {
 			//it's an array
 			if ( data[0].length ) {
@@ -49,7 +66,7 @@
 			}
 		}
 		
-		switch ( parameters.charType ) {
+		switch ( parameters.chartType ) {
 			case 'line':
 				return new Graffi.Line( holder, iterator, parameters );
 			case 'multibar':
@@ -63,11 +80,10 @@
 				return new Graffi.Pie( holder, iterator, parameters );
 
 		}
-		
-	}
+	};
 	
 	/**
-	 * Irerator factory contains convenience methods to generate iterators and stuff
+	 * Iterator factory contains convenience methods to generate iterators and stuff
 	 */
 	Graffi.IteratorFactory={};
 	Graffi.IteratorFactory.create1DIteratorFrom1DArray = function( data ) {
