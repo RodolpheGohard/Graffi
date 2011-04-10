@@ -6,6 +6,6 @@
 	
 	Graffi.Pie = function( holder, iterator, parameters ) {
 		
-	}
+	};
 	
 })();

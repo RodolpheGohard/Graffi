@@ -122,7 +122,7 @@
 		//Looop the series
 		while ( currentSeries = this.iterator.next() ) {
 			is=0;
-			points = []
+			points = [];
 			color = currentSeries.color;
 			//Loop values in current Series
 			while ( currentValue = currentSeries.iterator.next() ) {
@@ -133,6 +133,6 @@
 			this.drawer.drawLine( this.holder, points, color );
 			iv++;
 		}
-	}
+	};
 	
 })();
