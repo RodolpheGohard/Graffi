@@ -1,4 +1,6 @@
 /**
+ * a mother class of all Graffi Charts.
+ * @class Chart
  * @author Rodolphe Gohard
  */
 (function(){
@@ -23,7 +25,7 @@
 		drawGrid : function( ox, oy, w, h, xmax, ymax, xgrad, ygrad, grid ) {
 			
 			//From raphael analytics.js
-			var color = color || "#444";
+			var color = color || "#666";
 			var path = [
 				"M",
 				Math.round(ox),
@@ -54,7 +56,7 @@
 					Math.round(ox)-15,
 					Math.round(oy + i * rowHeight),
 					Math.round( (ygrad-i)*ymax/ygrad )
-				).attr( {font: '12px Helvetica, Arial', fill: 'Black'} );  
+				).attr( {font: '12px Helvetica, Arial', fill: color} );  
 			}
 			for (i = 1; i <xgrad; i++) {
 				path = path.concat(
@@ -70,7 +72,7 @@
 					Math.round(ox + i * columnWidth),
 					Math.round(oy+h)+ 10,
 					i*xmax/xgrad
-				).attr( {font: '12px Helvetica, Arial', fill: "Black"} );
+				).attr( {font: '12px Helvetica, Arial', fill: color} );
 			}
 			return this.holder.path(path.join(",")).attr({stroke: color});
 		
