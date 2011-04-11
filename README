@@ -1,4 +1,4 @@
-Graffi is an opensource JS charting library. It was created as an alternative to the solutions to avoid:
+Graffi is an opensource JS charting library. It was created as an alternative to existing solutions in the goal of remedying:
 -Requiring of Flash Technology
 -dependance on a thirdparty js framework(like prototype) outside Raphael 
 -lacking features
