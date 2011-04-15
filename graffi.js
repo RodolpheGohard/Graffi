@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+
 (function() {
 	
 	var isFunction = function(obj) {
@@ -49,8 +50,8 @@ THE SOFTWARE.
 	 * please refer to each Chart's class documentation to read about them.
 	 * 
 	 */
+	
 	var Graffi = function( block, data, options ) {
-		
 		var holder,
 			width,
 			height,
@@ -68,9 +69,10 @@ THE SOFTWARE.
 			//block is nuthin
 			block = document.createElement( 'div' );
 			holder = Raphael( block, width, height );
-		} else if ( block.split ) {
+		} else if ( typeof block === "string" ) {
 			//It's a str id
 			block = document.getElementById( block ) || document.createElement( 'div' ); //in case str id is shit
+			alert(Raphael);
 			holder = Raphael( block, width, height );
 		} else if ( block.nodeType == 1 ) {
 			//It's a html element

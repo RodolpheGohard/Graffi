@@ -64,41 +64,41 @@
 	<script type="text/javascript">
 		//Default chart, a simple array is passed
 		var g1 = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], {w:400,h:300} ); //default chartType is bars
-		//Chart type is given : line
-		var g2 = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line"} );
-		//Multiple series as a barchart
-		var g3 = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
-		//Multiple values as a piechart
-		var g4 = Graffi( 'holder4', [23,30,12,30,10,26], {w:400,h:300,chartType:"pie"} );
-		//Several lines with the smooth line Drawer
-
-
-		var g5 = Graffi( 'holder5', [ [0.3,2,4,0], [6,3,2.7,0], [2,0.8,5,0], [1,1,1,1,0], [6,1,6,1,0] ], {w:400,h:300,chartType:'multiline'} );
-		//a function is given as data, lotta parameters defined
-		var g5 = Graffi(
-			'holder6',
-			function(x) { return Math.sin( x ); },
-			{
-				w:400, //canvas width
-				h:300, //canvas height
-				chartType: "line",
-				lineDrawer: Graffi.Line.TsmoothLineDrawer, //this is given the points to plot
-				gridXStep: Math.PI/3, //For the grid, value of x-space of each tile
-				gridYStep: 0.5, //For the grid, value of y-space of each tile
-				gradXStep: Math.PI/6, //unused
-				gradYStep: 0.1,
-				xMin: 0, //min x value to show
-				xMax: Math.PI * 2, //max x value to display
-				yMin: -1.4, //you got it
-				yMax: 1.4,
-				fStep: 0.3, //because of the function passed as data, this will determine the x distance between each f(x) calculation
-				xAxis: -1, //the Y pos of the xAxis(horizontal)
-				yAxis: 1, //The X pos of the yAxis(vertical)
-				axisXName: 'x', //A text to be displayed under xAxis
-				axisYName: 'sin(x)', //A text to be displayed along yAxis
-				title: 'f(x) = sin(x)' //a title for our chart
-			}
-		);
+//		//Chart type is given : line
+//		var g2 = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line"} );
+//		//Multiple series as a barchart
+//		var g3 = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
+//		//Multiple values as a piechart
+//		var g4 = Graffi( 'holder4', [23,30,12,30,10,26], {w:400,h:300,chartType:"pie"} );
+//		//Several lines with the smooth line Drawer
+//
+//
+//		var g5 = Graffi( 'holder5', [ [0.3,2,4,0], [6,3,2.7,0], [2,0.8,5,0], [1,1,1,1,0], [6,1,6,1,0] ], {w:400,h:300,chartType:'multiline'} );
+//		//a function is given as data, lotta parameters defined
+//		var g5 = Graffi(
+//			'holder6',
+//			function(x) { return Math.sin( x ); },
+//			{
+//				w:400, //canvas width
+//				h:300, //canvas height
+//				chartType: "line",
+//				lineDrawer: Graffi.Line.TsmoothLineDrawer, //this is given the points to plot
+//				gridXStep: Math.PI/3, //For the grid, value of x-space of each tile
+//				gridYStep: 0.5, //For the grid, value of y-space of each tile
+//				gradXStep: Math.PI/6, //unused
+//				gradYStep: 0.1,
+//				xMin: 0, //min x value to show
+//				xMax: Math.PI * 2, //max x value to display
+//				yMin: -1.4, //you got it
+//				yMax: 1.4,
+//				fStep: 0.3, //because of the function passed as data, this will determine the x distance between each f(x) calculation
+//				xAxis: -1, //the Y pos of the xAxis(horizontal)
+//				yAxis: 1, //The X pos of the yAxis(vertical)
+//				axisXName: 'x', //A text to be displayed under xAxis
+//				axisYName: 'sin(x)', //A text to be displayed along yAxis
+//				title: 'f(x) = sin(x)' //a title for our chart
+//			}
+//		);
 	</script>
 </body>
 </html>
