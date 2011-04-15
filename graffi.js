@@ -22,6 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 (function() {
+	
+	var isFunction = function(obj) {
+	    return Object.prototype.toString.call(obj) === "[object Function]";
+	};
+	
 	/**
 	 * don't new it.
 	 * @class Graffi
@@ -53,7 +58,7 @@ THE SOFTWARE.
 			parameters= options;
 		
 		//Sanitizing parameters
-		parameters = parameters || {};
+		parameters = options || {};
 		width = parameters.width || parameters.w || 450;
 		height = parameters.height || parameters.h || 280;
 		
@@ -75,9 +80,9 @@ THE SOFTWARE.
 		}
 		
 		//We try to guess how data is formed. An iterator over the dataset is generated.
-		if ( data.length ) {
+		if ( data.constructor == Array ) {
 			//it's an array
-			if ( data[0].length ) {
+			if ( data[0].constructor == Array ) {
 				//2D or more array
 				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data );
 				
@@ -85,6 +90,10 @@ THE SOFTWARE.
 				//One series only
 				iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( data );
 			}
+		} else if ( isFunction(data) ) {
+			//Check f().length for 1D, 2D or 3D funcs
+			iterator = Graffi.IteratorFactory.create1DIteratorFromFunction( data, options.xMin, options.xMax, options.fStep );
+			if ( !parameters.chartType ) parameters.chartType = 'line';
 		}
 		
 		switch ( parameters.chartType ) {
@@ -117,7 +126,7 @@ THE SOFTWARE.
 	 */
 	Graffi.IteratorFactory.create1DIteratorFrom1DArray = function( data ) {
 		var labels = [],
-			l = data.length;
+			l = data.length,
 			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
 		colors.length = l;
@@ -130,11 +139,33 @@ THE SOFTWARE.
 	 */
 	Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray = function( data ) {
 		var labels = [],
-			l = data.length;
+			l = data.length,
 			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
 		colors.length = l;
 		return new Graffi.Iterator1dMulti( data, labels, colors );
+	};
+	
+	Graffi.IteratorFactory.create1DIteratorFromFunction = function( f, xmin, xmax, increment ) {
+		var labels = [],
+			xmin = xmin || 0,
+			l = xmax || 20,
+			increment = increment || 1,
+			data = [],
+			colors = ['#F00'];
+		
+		var j=0;
+		for ( var i=xmin ; i<l ; i+= increment ) {
+			data[j++] = f(i);
+		}
+		
+		
+
+		labels.length = j;
+		//colors.length = l;
+
+		
+		return new Graffi.Iterator1D( data, labels, colors );
 	};
 	
 	/**
@@ -364,25 +395,25 @@ THE SOFTWARE.
 		},
 		S: function( x2,y2,x,y ) {
 			var i,l,a=arguments;
-			this.str += ' C'+x2+','+y2+' '+x+','+y;
+			this.str += ' S'+x2+','+y2+' '+x+','+y;
 			for ( i=6,l=a.length ; i<l; i+=4 ) {
-				this.str += ' C'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
+				this.str += ' S'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
 			}
 			return this;
 		},
 		Q: function( x1,y1,x,y ) {
 			var i,l,a=arguments;
-			this.str += ' C'+x1+','+y1+' '+x+','+y;
+			this.str += ' Q'+x1+','+y1+' '+x+','+y;
 			for ( i=6,l=a.length ; i<l; i+=4 ) {
-				this.str += ' C'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
+				this.str += ' Q'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
 			}
 			return this;
 		},
 		T: function( x,y ) {
 			var i,l,a=arguments;
-			this.str += ' C'+x+','+y;
+			this.str += ' T'+x+','+y;
 			for ( i=6,l=a.length ; i<l; i+=2 ) {
-				this.str += ' C'+a[i]+','+a[i+1];
+				this.str += ' T'+a[i]+','+a[i+1];
 			}
 			return this;
 		},

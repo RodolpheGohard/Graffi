@@ -20,7 +20,8 @@
 		};
 		this.max = function() {
 			return Math.max.apply(this, data);
-		}
+		};
+		this.getColor = function() { return colors[0];};
 	};
 	/*Graffi.Iterator1D.prototype.max = function() {
 		

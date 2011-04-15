@@ -3,6 +3,9 @@
  */
 
 (function(){
+	
+
+
 
 	/**
 	 * Draws a single line chart
@@ -14,8 +17,10 @@
 	Graffi.Line = function ( holder, iterator, parameters ) {
 		if ( !holder || !iterator || !parameters) return;
 		
-		var ymax=10,
-			xmax=iterator.length,
+		var ymin = parameters.yMin || 0,
+			xmin = parameters.xMin || 0,
+			ymax = parameters.yMax || 10,
+			xmax = parameters.xMax || iterator.length,
 			xscale,
 			yscale;
 		
@@ -25,16 +30,24 @@
 		this.width = holder.width-50;
 		this.height = holder.height-40;
 		
+		this.xMin = xmin;
+		this.xMax = xmax;
+		this.yMin = ymin;
+		this.yMax = ymax;
 		
-		this.drawGrid( 40, 10, this.width, this.height, xmax, ymax, 10, 5, true);
+		
+		//this.drawGrid( 40, 10, this.width, this.height, xmax, ymax, 10, 5, true);
+		this.drawGridOptions( 40, 10, this.width, this.height, xmin, ymin, xmax, ymax, parameters );
+		//this.drawAxis( 40, 10, this.width, this.height, xmin, ymin, parameters.yAxis, parameters.xAxis );
 		
 		//which width for a bar
-		xscale = this.width / xmax;
+		xscale = this.width / (xmax-xmin);
 		//which height is a unit
-		yscale = this.height /ymax;
+		yscale = this.height / (ymax-ymin);
 		
 		
-		this.drawLines( 40, this.height+10, this.width, this.height, xscale, yscale );
+		this.drawer = parameters.lineDrawer || Graffi.Line.straightLineDrawer;
+		this.drawLines( 40, this.height+10, this.width, this.height, this.width/iterator.length, yscale );
 	};
 	
 	Graffi.Line.prototype = new Graffi.Chart();
@@ -44,18 +57,18 @@
 		var current,
 			i=0,
 			points = [],
-			color;
+			color = this.iterator.getColor();
 		
 		while ( current = this.iterator.next() ) {
-			points.push( [ i*xscale+x, y-current[0]*yscale  ] );
-			color = current[2];
+			points.push( [ (i)*xscale+x, y-(current[0]-this.yMin)*yscale  ] );
+			//color = current[2];
 			i++;
 		}
 		
 		this.drawer.drawLine( this.holder, points, color );
 	};
 	
-	Graffi.Line.prototype.drawer = {
+	Graffi.Line.prototype.drawer = Graffi.Line.straightLineDrawer = {
 		drawLine: function( holder, points, color ) {
 			var i=0,
 				l=points.length,
@@ -79,6 +92,28 @@
 		}
 		
 	};
+	Graffi.Line.TsmoothLineDrawer = {
+			drawLine: function( holder, points, color ) {
+				var i=0,
+					l=points.length,
+					path;
+				if ( points.length==0 ) return;
+				
+				path = new Graffi.PathWrapper().M( points[0][0] , points[0][1] );
+				
+				for ( i=1 ; i<l ; i++) {
+					path.T( points[i][0], points[i][1] );
+				}
+				
+				holder.path( path ).attr( {
+					stroke: color,
+					'stroke-width':'8px',
+					'stroke-linecap': 'round',
+					'stroke-linejoin': 'round'
+				} );
+
+			}
+	}
 	
 	/**
 	 * Draws a multi - lines chart
@@ -107,7 +142,8 @@
 		//which height is a unit
 		yscale = this.height /ymax;
 		
-		
+
+		this.drawer = parameters.lineDrawer || Graffi.Line.straightLineDrawer;
 		this.drawLines( 40, this.height+10, this.width, this.height, xscale, yscale );
 	};
 	Graffi.MultiLine.prototype = new Graffi.Line();
