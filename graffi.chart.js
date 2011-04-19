@@ -108,6 +108,7 @@
 //				gridColumnWidth = w/ (options.gridXStep||20);
 			
 			var color,
+				textColor,
 				path,
 				
 				xgrads,
@@ -128,6 +129,7 @@
 				gridAttributes;
 			
 			color = options.gridColor || "#666";
+			textColor = options.textColor || '#666';
 			gridAttributes = {font: '12px Helvetica, Arial', fill: color};
 			path = new Graffi.PathWrapper();
 			
@@ -210,7 +212,7 @@
 					oy+15,
 					options.title
 				).attr({
-					fill: 'White',
+					fill: textColor,
 					'font-family': 'sans-serif',
 					'font-size' : '16px'
 				});
@@ -221,7 +223,7 @@
 						oy+h+23,
 						options.axisXName
 					).attr({
-						fill: 'White',
+						fill: textColor,
 						'font-family': 'sans-serif',
 						'font-size' : '12px'
 					});
@@ -231,7 +233,7 @@
 						oy+h/2,
 						options.axisYName
 					).attr({
-						fill: 'White',
+						fill: textColor,
 						'font-family': 'sans-serif',
 						'font-size' : '12px'
 					})

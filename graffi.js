@@ -72,7 +72,6 @@ THE SOFTWARE.
 		} else if ( typeof block === "string" ) {
 			//It's a str id
 			block = document.getElementById( block ) || document.createElement( 'div' ); //in case str id is shit
-			alert(Raphael);
 			holder = Raphael( block, width, height );
 		} else if ( block.nodeType == 1 ) {
 			//It's a html element
