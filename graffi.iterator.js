@@ -21,6 +21,9 @@
 		this.max = function() {
 			return Math.max.apply(this, data);
 		};
+		this.reset = function() {
+			this.index = 0;
+		};
 		this.getColor = function() { return colors[0];};
 	};
 	/*Graffi.Iterator1D.prototype.max = function() {
@@ -49,7 +52,11 @@
 		this.next = function() {
 			if (this.index == this.length) return null;
 			return this.get(this.index++);
-		}
+		};
+
+		this.reset = function() {
+			this.index = 0;
+		};
 		this.max = function() {
 			if ( this.maxValue === undefined ) {
 				for (var i=0;i<this.length;i++) {
@@ -60,7 +67,7 @@
 				}
 			}
 			return this.maxValue;
-		}
-	}
+		};
+	};
 	
 })();

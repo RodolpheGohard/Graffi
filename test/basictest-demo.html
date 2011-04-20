@@ -63,9 +63,10 @@
 	</div>
 	<script type="text/javascript">
 		//Default chart, a simple array is passed
-		var g1 = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], {w:400,h:300} ); //default chartType is bars
+		var g1 = Graffi( 'holder1', [0.3,2,4,0,0,1,1,6,1,6,1], { w:400, h:300 } ); //default chartType is bars
 		//Chart type is given : line
-		var g2 = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line"} );
+		var g2 = Graffi( 'holder2', [0.3,2,4,0,0,6,3,2.7,2,0.8,5,1,1,1,1,6,1,6,1], {w:400,h:300,chartType:"line",
+			dots: [ "%x : %y tags:aaa,bbb", "GG", "Hop là", "test" ]} );
 		//Multiple series as a barchart
 		var g3 = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
 		//Multiple values as a piechart

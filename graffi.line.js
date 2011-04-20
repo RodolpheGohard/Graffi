@@ -48,9 +48,38 @@
 		
 		this.drawer = parameters.lineDrawer || Graffi.Line.straightLineDrawer;
 		this.drawLines( 40, this.height+10, this.width, this.height, this.width/iterator.length, yscale );
+		
+		if ( parameters.dots ) {
+			this.drawDots( parameters.dots, 40, this.height+10, this.width, this.height, this.width/iterator.length, yscale );
+		}
 	};
 	
 	Graffi.Line.prototype = new Graffi.Chart();
+	
+	Graffi.Line.prototype.drawDots = function( dots,x,y,w,h,xscale,yscale ) {
+		
+		var current,
+			i=0,
+			points = [],
+			color = this.iterator.getColor();
+	
+		this.iterator.reset();
+		
+		//TODO: merge the points generation on drawLines and drawDots
+		while ( current = this.iterator.next() ) {
+			var point = new Graffi.Component( this );
+			point.x = (i)*xscale+x;
+			point.y = y-(current[0]-this.yMin)*yscale;
+			point.element = this.holder.circle( point.x, point.y, 5 ).attr( {
+				fill: color,
+				stroke: Graffi.ColorTools.darkenRGBabs( color, 20 )
+			} );
+			
+			//if a content is specified, we place it
+			if ( dots[i] ) point.tooltip( dots[i] );
+			i++;
+		}
+	};
 	
 	Graffi.Line.prototype.drawLines = function( x,y,w,h,xscale,yscale ) {
 		//assuming one series only, and x-fixed intervals
@@ -113,7 +142,7 @@
 				} );
 
 			}
-	}
+	};
 	
 	/**
 	 * Draws a multi - lines chart

@@ -282,9 +282,14 @@ THE SOFTWARE.
 			var tt = _that.getTooltip();
 			
 			this.element.hover( function(event){
-				var re = _that.chart.tooltip[0];
+				var re = _that.chart.tooltip[0].attr( {
+					width : 80 + contents.length*10,
+					height: 30
+//					x : -40-contents.length*5
+				} );
 				var rt = _that.chart.tooltip[1];
 				var p = re[0].parentElement;
+				//To the top
 				p.appendChild( _that.element[0] );
 				p.appendChild( re[0] );
 				p.appendChild( rt[0] );
@@ -327,7 +332,8 @@ THE SOFTWARE.
 					'stroke': 'none',
 					'stroke-width': '0',
 					'fill': 'white',
-					'font-weight': 'normal'
+					'font-weight': 'normal',
+					'text-anchor': 'start'
 				});
 				this.chart.tooltip.push(
 					this.chart.holder.rect(-40, -15, 80, 30, 10).attr({
@@ -436,16 +442,46 @@ THE SOFTWARE.
 		 * @returns {String} the newly generated color in rgb(12,34,255) format
 		 */
 		darkenRGBabs: function( color, amount ) {
-			 var ocolor = Raphael.getRGB( color );
-			 ocolor.r -= amount;
-			 ocolor.g -= amount;
-			 ocolor.b -= amount;
-			 if(ocolor.r<0) ocolor.r = 0;
-			 if(ocolor.g<0) ocolor.g = 0;
-			 if(ocolor.b<0) ocolor.b = 0;
-			 
-			 return 'rgb('+ocolor.r+','+ocolor.g+','+ocolor.b+')';
+			var rr,gg,bb;
+			var ocolor = Raphael.getRGB( color );
+			//Shitty memoizing function :/
+//			ocolor.r -= amount;
+//			ocolor.g -= amount;
+//			ocolor.b -= amount;
+			rr=ocolor.r - amount;
+			gg=ocolor.g - amount;
+			bb=ocolor.b - amount;
+			if(rr<0) rr = 0;
+			if(gg<0) gg = 0;
+			if(bb<0) bb = 0;
+			
+			return 'rgb('+rr+','+gg+','+bb+')';
 		}
+	};
+	
+	Graffi.Group = function() {
+		var group = [];
+		
+		group.x = 0;
+		group.y = 0;
+		
+		this.concat( arguments );
+		
+		group.moveBy = function( x,y ) {
+			var i,l=this.length;
+			
+			this.x += x;
+			this.y += y;
+			
+			for ( i=0 ; i<l ; i++ ) {
+				this[i].translate( x, y );
+			}
+		};
+		// Deprecated use, but this way groups can be added to groups.
+		group.translate = group.moveBy;
+		group.moveTo = function( x,y ) {
+			this.mobeBy( x-this.x, y-this.y );
+		};
 	};
 	
 	window.Graffi = Graffi;
