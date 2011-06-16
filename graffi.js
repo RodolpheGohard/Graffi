@@ -283,16 +283,20 @@ THE SOFTWARE.
 			
 			this.element.hover( function(event){
 				var re = _that.chart.tooltip[0].attr( {
-					width : 80 + contents.length*10,
+					width : 30 + contents.length*6,
 					height: 30
 //					x : -40-contents.length*5
 				} );
 				var rt = _that.chart.tooltip[1];
 				var p = re[0].parentElement;
 				//To the top
-				p.appendChild( _that.element[0] );
-				p.appendChild( re[0] );
-				p.appendChild( rt[0] );
+//				p.appendChild( _that.element[0] );
+//				p.appendChild( re[0] );
+//				p.appendChild( rt[0] );
+				
+				_that.element.toFront();
+				re.toFront();
+				rt.toFront();
 				
 				_that.element.attr({
 					'stroke-width' : '8px',
@@ -326,9 +330,9 @@ THE SOFTWARE.
 			}
 			else {
 				this.chart.tooltip = this.chart.holder.set();
-				this.chart.tooltip.tttext = this.chart.holder.text(0,0,'').attr({
+				this.chart.tooltip.tttext = this.chart.holder.text( 5,15,'').attr({
 					'font-family': 'sans-serif',
-					'font-size': '16px',
+					'font-size': '14px',
 					'stroke': 'none',
 					'stroke-width': '0',
 					'fill': 'white',
@@ -336,7 +340,7 @@ THE SOFTWARE.
 					'text-anchor': 'start'
 				});
 				this.chart.tooltip.push(
-					this.chart.holder.rect(-40, -15, 80, 30, 10).attr({
+					this.chart.holder.rect( 0, 0, 80, 30, 10 ).attr({
 						fill: "Black",
 						stroke: "white",
 						"stroke-width": "2px",

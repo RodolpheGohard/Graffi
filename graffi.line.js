@@ -50,13 +50,21 @@
 		this.drawLines( 40, this.height+10, this.width, this.height, this.width/iterator.length, yscale );
 		
 		if ( parameters.dots ) {
-			this.drawDots( parameters.dots, 40, this.height+10, this.width, this.height, this.width/iterator.length, yscale );
+			this.drawDots(
+				parameters.dots, 
+				40, this.height+10, 
+				this.width, 
+				this.height, 
+				this.width/iterator.length, 
+				yscale, 
+				parameters.dotsHrefs
+			);
 		}
 	};
 	
 	Graffi.Line.prototype = new Graffi.Chart();
 	
-	Graffi.Line.prototype.drawDots = function( dots,x,y,w,h,xscale,yscale ) {
+	Graffi.Line.prototype.drawDots = function( dots,x,y,w,h,xscale,yscale,dotsHrefs ) {
 		
 		var current,
 			i=0,
@@ -72,11 +80,13 @@
 			point.y = y-(current[0]-this.yMin)*yscale;
 			point.element = this.holder.circle( point.x, point.y, 5 ).attr( {
 				fill: color,
-				stroke: Graffi.ColorTools.darkenRGBabs( color, 20 )
+				stroke: Graffi.ColorTools.darkenRGBabs( color, 20 ),
+				'stroke-width' : '2px'
 			} );
 			
 			//if a content is specified, we place it
 			if ( dots[i] ) point.tooltip( dots[i] );
+			if ( dotsHrefs && dotsHrefs[i] ) point.element.attr( 'href', dotsHrefs[i] );
 			i++;
 		}
 	};
