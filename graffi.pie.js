@@ -72,7 +72,8 @@
 			pathStr = new Graffi.PathWrapper()
 				.M( pie.ox,pie.oy) //Start at center
 				.L( x1,y1 ) //line to starting angle
-				.A( r,r , d*radToDeg, 0,1, x2,y2 ) //Circle arc to end angle
+//				.A( r,r , d*radToDeg, 0,1, x2,y2 ) //Circle arc to end angle
+				.A( r,r , 1, (d>Math.PI?1:0),1, x2,y2 ) //Circle arc to end angle
 				.Z().toString(); //We close and have our slice path
 			
 //			pathStr = 
