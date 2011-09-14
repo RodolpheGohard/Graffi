@@ -312,7 +312,7 @@ THE SOFTWARE.
 			
 			this.element.mouseout( function(event) {
 				_that.element.attr({
-					'stroke-width' : '2px'
+					'stroke-width' : '0px'
 				});
 				_that.getTooltip().hide();
 			});
