@@ -29,7 +29,7 @@ THE SOFTWARE.
 	};
 	
 	/**
-	 * don't new it.
+	 * don't new it().
 	 * @class Graffi
 	 */
 	/**
@@ -281,6 +281,11 @@ THE SOFTWARE.
 			var _that = this;
 			var tt = _that.getTooltip();
 			
+			this.element.attr( {
+				title: contents
+			} );
+			//return;
+			
 			this.element.hover( function(event){
 				var re = _that.chart.tooltip[0].attr( {
 					width : 30 + contents.length*6,
@@ -303,9 +308,9 @@ THE SOFTWARE.
 					'stroke-linecap' : 'round',
 					'stroke-linejoin' : 'round'
 				});
-				tt	.show()
-					.translate( _that.x - tt[0].attr('x'), _that.y - tt[0].attr('y') )
-				.tttext.attr({text:contents});
+//				tt	.show()
+//					.translate( _that.x - tt[0].attr('x'), _that.y - tt[0].attr('y') )
+//				.tttext.attr({text:contents});
 				
 				
 			} );
@@ -443,6 +448,7 @@ THE SOFTWARE.
 		 * don't mess with negative amounts.
 		 * @param color
 		 * @param amount
+		 * @method darkenRGBabs
 		 * @returns {String} the newly generated color in rgb(12,34,255) format
 		 */
 		darkenRGBabs: function( color, amount ) {
