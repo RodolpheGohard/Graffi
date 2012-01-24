@@ -81,7 +81,7 @@
 			point.element = this.holder.circle( point.x, point.y, 5 ).attr( {
 				fill: color,
 				stroke: Graffi.ColorTools.darkenRGBabs( color, 20 ),
-				'stroke-width' : '2px'
+				'stroke-width' : 2
 			} );
 			
 			//if a content is specified, we place it
@@ -122,7 +122,7 @@
 			
 			holder.path( path ).attr( {
 				stroke: color,
-				'stroke-width':'4px',
+				'stroke-width':2,
 				'stroke-linecap': 'round',
 				'stroke-linejoin': 'round'
 			} );
@@ -146,7 +146,7 @@
 				
 				holder.path( path ).attr( {
 					stroke: color,
-					'stroke-width':'8px',
+					'stroke-width':2,
 					'stroke-linecap': 'round',
 					'stroke-linejoin': 'round'
 				} );
@@ -162,10 +162,14 @@
 	 * @param parameters some additional parameters to control the displaying
 	 */
 	Graffi.MultiLine = function( holder, iterator, parameters ) {
-		var ymax=10,
-			xmax=iterator.get(0).iterator.length,
-			xscale,
-			yscale;
+		if ( !holder || !iterator || !parameters) return;
+		
+		var ymin = parameters.yMin || 0,
+	        xmin = parameters.xMin || 0,
+	        ymax = parameters.yMax || 10,
+	        xmax = parameters.xMax || iterator.get(0).iterator.length-1,
+	        xscale,
+	        yscale;
 		
 		this.holder = holder;
 		this.iterator = iterator;
@@ -173,8 +177,12 @@
 		this.width = holder.width-50;
 		this.height = holder.height-40;
 		
+		this.xMin = xmin;
+        this.xMax = xmax;
+        this.yMin = ymin;
+        this.yMax = ymax;
 		
-		this.drawGrid( 40, 10, this.width, this.height, xmax, ymax, 10, 5, true);
+		this.drawGridOptions( 40, 10, this.width, this.height, xmin, ymin, xmax, ymax, parameters );
 		
 		//which width for a bar
 		xscale = this.width / xmax;

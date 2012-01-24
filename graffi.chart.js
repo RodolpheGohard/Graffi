@@ -126,6 +126,9 @@
 				xrange = xmax - xmin,
 				yrange = ymax - ymin,
 				
+				gradXFormatter = options.gradXFormatter || function(v){return v;},
+				gradYFormatter = options.gradYFormatter || function(v){return v;},
+				
 				gridAttributes;
 			
 			color = options.gridColor || "#666";
@@ -185,7 +188,7 @@
 				this.holder.text(
 					Math.round(ox + i * gridColumnWidth),
 					oy + h + 10,
-					(xmin + i*gridXStep).toFixed(1)
+					gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
 				).attr( gridAttributes );
 			}
 			
@@ -257,7 +260,7 @@
 			return this.holder.path( path.toString() ).attr({
 				classname: 'axis',
 				stroke:'#666',
-				'stroke-width': '2px'
+				'stroke-width': 2
 			});
 		}
 	
