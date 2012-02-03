@@ -81,7 +81,10 @@ THE SOFTWARE.
 		}
 		
 		//We try to guess how data is formed. An iterator over the dataset is generated.
-		if ( data.constructor == Array ) {
+		if ( !data ) {
+			//what is it ??
+			iterator = iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( [0] );
+		} else if ( data.constructor == Array ) {
 			//it's an array
 			if ( data[0].constructor == Array ) {
 				//2D or more array
