@@ -15,7 +15,7 @@
 		if ( !holder || !iterator || !parameters) return;
 		
 		var ymax=iterator.max(),
-			xmax=iterator.length
+			xmax=iterator.length,
 			xscale,
 			yscale;
 		
@@ -33,7 +33,7 @@
 		var yscale = this.height /ymax;
 		
 		this.drawBars( 40, this.height+10, this.width, this.height, xscale, yscale );
-	}
+	};
 	
 	Graffi.Bar.prototype = new Graffi.Chart();
 	/**
