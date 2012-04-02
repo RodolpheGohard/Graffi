@@ -88,11 +88,11 @@ THE SOFTWARE.
 			//it's an array
 			if ( data[0].constructor == Array ) {
 				//2D or more array
-				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data );
+				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data,parameters.labels );
 				
 			} else {
 				//One series only
-				iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( data );
+				iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( data,parameters.labels );
 			}
 		} else if ( isFunction(data) ) {
 			//Check f().length for 1D, 2D or 3D funcs
@@ -128,8 +128,8 @@ THE SOFTWARE.
 	 * likely for piechart or barchart
 	 * @method create1DIteratorFrom1DArray
 	 */
-	Graffi.IteratorFactory.create1DIteratorFrom1DArray = function( data ) {
-		var labels = [],
+	Graffi.IteratorFactory.create1DIteratorFrom1DArray = function( data, labels ) {
+		var labels = labels||[],
 			l = data.length,
 			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
@@ -141,8 +141,8 @@ THE SOFTWARE.
 	 * Labels for each series will be empty and colors are generated per-series with generateWheelColors
 	 * @method createMulti1DIteratorFrom2DArray
 	 */
-	Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray = function( data ) {
-		var labels = [],
+	Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray = function( data, labels ) {
+		var labels = labels||[],
 			l = data.length,
 			colors = Graffi.IteratorFactory.generateWheelColors( l );
 		labels.length = l;
@@ -150,8 +150,8 @@ THE SOFTWARE.
 		return new Graffi.Iterator1dMulti( data, labels, colors );
 	};
 	
-	Graffi.IteratorFactory.create1DIteratorFromFunction = function( f, xmin, xmax, increment ) {
-		var labels = [],
+	Graffi.IteratorFactory.create1DIteratorFromFunction = function( f, xmin, xmax, increment, labels ) {
+		var labels = labels||[],
 			xmin = xmin || 0,
 			l = xmax || 20,
 			increment = increment || 1,
