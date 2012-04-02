@@ -497,6 +497,44 @@ THE SOFTWARE.
 		};
 	};
 	
+	Graffi.getLegend = function( chart ) {
+		return new Graffi.Legend( chart );
+	};
+	Graffi.Legend = function( chart ) {
+		var ul = this.element = document.createElement('ul');
+		ul.className = 'graffi-legend';
+		this.chart = chart;
+		
+		var iterator = chart.iterator;
+		iterator.reset();
+		var series;
+		var li;
+		while( series = iterator.next() ) {
+			li = document.createElement('li');
+			ul.appendChild(li);
+			var square = document.createElement('span');
+			square.style.border = '1px solid #666';
+			square.style.backgroundColor = series.color || series[2]; //TODO: find a reliable to determine iterator.next() type and have reliable accessors
+			square.style.width = '10px';
+			square.style.height = '10px';
+			square.style.display = 'inline-block';
+			square.style.marginRight = '10px';
+			li.appendChild(square);
+			var label = document.createElement('span');
+			label.innerHTML = series.label || series[1];
+			li.appendChild(label);
+		}
+	};
+	Graffi.Legend.prototype = {
+		getElement: function(){return this.element;},
+		show: function(){
+			this.element.style.display = 'block';
+		},
+		hide: function() {
+			this.element.style.display = 'none';
+		}
+	};
+	
 	window.Graffi = Graffi;
 	
 })();
