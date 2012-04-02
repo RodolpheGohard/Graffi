@@ -92,7 +92,7 @@
 			slice.x = x1;
 			slice.y = y1;
 			
-			slice.tooltip( "test" );
+			if(label)slice.tooltip( label );
 			
 			return slice;
 		},
