@@ -25,7 +25,7 @@
 		h2 {
 			color: #DDD;
 		}
-		#holder1, #holder2, #holder3, #holder4, #holder5, #holder6 {
+		#holder1, #holder2, #holder3, #holder4, #holder5, #holder6, .graffi-legend {
 			width: 400px;
 			height: 333px;
 			float: left;
@@ -54,9 +54,9 @@
 		</div>
 		<div id="holder4" style="border:1px solid Black;">
 		</div>
-		<div id="holder5" style="border:1px solid Black;">
-		</div>
 		<div id="holder6" style="border:1px solid Black;">
+		</div>
+		<div id="holder5" style="border:1px solid Black;">
 		</div>
 
 		<hr class="clear" />
@@ -70,9 +70,11 @@
 			dotsHrefs: [ "GOTHERE", "HERETO" ]
 		} );
 		//Multiple series as a barchart
-		var g3 = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar'} );
+		var g3 = Graffi( 'holder3', [ [0.3,2,4,0,0], [6,3,2.7], [2,0.8,5], [1,1,1,1], [6,1,6,1] ], {w:400,h:300,chartType:'multibar',labels: ['jambon','salami','crevettes','saucisson','andouille']} );
+		var legend = Graffi.getLegend( g3 );
+		document.getElementById('chartsDemo').appendChild( legend.getElement() );
 		//Multiple values as a piechart
-		var g4 = Graffi( 'holder4', [23,30,12,30,10,26], {w:400,h:300,chartType:"pie"} );
+		var g4 = Graffi( 'holder4', [23,30,12,30,10,26], {w:400,h:300,chartType:"pie", labels: ['H','C','O','N','S','P']} );
 		//Several lines with the smooth line Drawer
 
 
