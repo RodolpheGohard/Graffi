@@ -307,15 +307,15 @@ THE SOFTWARE.
 				rt.toFront();
 				
 				_that.element.attr({
-					'stroke-width' : '8px',
+					'stroke-width' : 8,
 					'stroke-linecap' : 'round',
 					'stroke-linejoin' : 'round'
 				});
-//				tt	.show()
-//					.translate( _that.x - tt[0].attr('x'), _that.y - tt[0].attr('y') )
-//				.tttext.attr({text:contents});
-				
-				
+				var bbox = _that.element.getBBox();
+				tt.show()
+					.transform( 'T'+(bbox.x+bbox.width - tt[0].attr('x')).toString()+','+ (_that.y - tt[0].attr('y')).toString() )
+//					.translate( bbox.x+bbox.width - tt[0].attr('x'), _that.y - tt[0].attr('y') )
+					.tttext.attr({text:contents});
 			} );
 			
 			this.element.mouseout( function(event) {
