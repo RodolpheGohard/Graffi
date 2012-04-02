@@ -23,6 +23,7 @@
 		};
 		this.reset = function() {
 			this.index = 0;
+			return this;
 		};
 		this.getColor = function() { return colors[0];};
 	};
@@ -56,6 +57,7 @@
 
 		this.reset = function() {
 			this.index = 0;
+			return this;
 		};
 		this.max = function() {
 			if ( this.maxValue === undefined ) {
