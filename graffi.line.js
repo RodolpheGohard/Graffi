@@ -166,7 +166,7 @@
 		
 		var ymin = parameters.yMin || 0,
 	        xmin = parameters.xMin || 0,
-	        ymax = parameters.yMax || 10,
+	        ymax = parameters.yMax || iterator.max() || 10,
 	        xmax = parameters.xMax || iterator.get(0).iterator.length-1,
 	        xscale,
 	        yscale;
