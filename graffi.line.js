@@ -131,6 +131,41 @@
 		}
 		
 	};
+	/**
+	 * Warning: shitty behaviour for non positive curves
+	 */
+	Graffi.Line.FilledLineDrawer = {
+		drawLine: function( holder, points, color, curvebounds ) {
+			var i=0,
+				l=points.length,
+				path;
+			if ( points.length==0 ) return;
+			
+			if ( curvebounds ) {
+				path = 'M'+curvebounds[0]+' '+curvebounds[1] +
+						'L'+points[0][0]+' '+points[0][1];
+			} else
+				path = 'M'+points[0][0]+' '+points[0][1];
+			
+			for ( i=1 ; i<l ; i++) {
+				path += 'L'+points[i][0]+' '+points[i][1];
+			}
+			
+			if ( curvebounds )
+				path += 'L'+curvebounds[2]+' '+curvebounds[3];
+			
+			holder.path( path ).attr( {
+				stroke: color,
+				'stroke-width':2,
+				'stroke-linecap': 'round',
+				'stroke-linejoin': 'round',
+				'fill': color,
+				'fill-opacity': 0.3
+			} );
+			
+			//path += 'L'+points[i][0]
+		}
+	};
 	Graffi.Line.TsmoothLineDrawer = {
 			drawLine: function( holder, points, color ) {
 				var i=0,
