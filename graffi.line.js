@@ -213,7 +213,7 @@
 				is++;
 			}
 			//Draw current series
-			this.drawer.drawLine( this.holder, points, color );
+			this.drawer.drawLine( this.holder, points, color, [x,y,x+w,y] );
 			iv++;
 		}
 	};
