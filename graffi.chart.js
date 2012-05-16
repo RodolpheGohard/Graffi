@@ -175,7 +175,8 @@
 				this.holder.text(
 					ox-15,
 					Math.round(oy + h - i * gridRowHeight),
-					(ymin + i*gridYStep).toFixed(2)
+					//(ymin + i*gridYStep).toFixed(2)
+					gradYFormatter( ymin + i*gridYStep )
 				).attr( gridAttributes );
 			}
 			
