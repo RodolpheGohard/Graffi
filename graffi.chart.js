@@ -182,15 +182,26 @@
 			
 			
 			// Grid Verticles
+			var currentVtextPos;
+			var lastVtextPos = -10000;
+			var minVtextDelta = 36;
 			for (var i = 1; i < gridColumns; i++) {
 				path.M( Math.round(ox + i * gridColumnWidth), oy )
 					.V( Math.round( oy + h ) );
 				
-				this.holder.text(
-					Math.round(ox + i * gridColumnWidth),
-					oy + h + 10,
-					gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
-				).attr( gridAttributes );
+				currentVtextPos = ox + i * gridColumnWidth;
+				if ( currentVtextPos - lastVtextPos >= minVtextDelta ) {
+					var vtext = this.holder.text(
+							Math.round( currentVtextPos ),
+							oy + h + 10,
+							gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
+						).attr( gridAttributes );
+					lastVtextPos = currentVtextPos;
+				} else {
+					
+				}
+				
+				vtext.transform('t-20,20r-45');
 			}
 			
 			
