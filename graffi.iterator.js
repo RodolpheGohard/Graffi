@@ -26,6 +26,15 @@
 			return this;
 		};
 		this.getColor = function() { return colors[0];};
+		this.csv = function() {
+			var i=0,
+				l=data.length,
+				csv = '';
+			for ( ; i<l ; i++ ) {
+				csv += (labels?labels[i]+',':'') + '\n';
+			}
+			return csv;
+		};
 	};
 	/*Graffi.Iterator1D.prototype.max = function() {
 		
@@ -69,6 +78,24 @@
 				}
 			}
 			return this.maxValue;
+		};
+		this.csv = function() {
+			this.reset();
+			var subIt,series,csv='';
+			while( series = this.next() ) {
+				subIt = series.iterator.reset();
+				csv += series.label;
+				var subs;
+				while( subs = subIt.next() ) {
+					csv += ',' + subs[0];
+				}
+				csv += '\n';
+			}
+			return csv;
+		};
+		this.openCsv = function( title ){
+			var url = 'data:text/csv;charset=utf-8;,' + encodeURIComponent( this.csv() );
+			window.open( url, title||'_blank' );
 		};
 	};
 	
