@@ -274,6 +274,13 @@
 				stroke:'#666',
 				'stroke-width': 2
 			});
+		},
+		legend: null,
+		getLegend: function() {
+			if ( this.legend ) return this.legend;
+			else {
+				return this.legend = new Graffi.Legend( this );
+			}
 		}
 	
 	};
