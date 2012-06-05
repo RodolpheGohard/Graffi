@@ -86,10 +86,9 @@ THE SOFTWARE.
 			iterator = iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( [0] );
 		} else if ( data.constructor == Array ) {
 			//it's an array
-			if ( data[0].constructor == Array ) {
+			if ( data[0] !== undefined && data[0].constructor == Array ) {
 				//2D or more array
 				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data,parameters.labels );
-				
 			} else {
 				//One series only
 				iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( data,parameters.labels );
