@@ -518,8 +518,10 @@ THE SOFTWARE.
 		iterator.reset();
 		var series;
 		var li;
+		var i=0;
 		while( series = iterator.next() ) {
 			li = document.createElement('li');
+			li.setAttribute('data-graffi-oid',i);
 			ul.appendChild(li);
 			var square = document.createElement('span');
 			square.style.border = '1px solid #666';
@@ -532,6 +534,7 @@ THE SOFTWARE.
 			var label = document.createElement('span');
 			label.innerHTML = series.label || series[1];
 			li.appendChild(label);
+			i++;
 		}
 	};
 	Graffi.Legend.prototype = {
