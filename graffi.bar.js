@@ -42,32 +42,51 @@
 	 * @protected
 	 */
 	Graffi.Bar.prototype.drawBars = function( x, y, w, h, xscale, yscale ) {
-			var currentValue = null,
-				i=0;
-			while ( currentValue=this.iterator.next() ) {
-				this.drawer.drawBar(
-					this.holder, 
-					x+i*xscale, 
-					y-currentValue[0]*yscale,
-					xscale,
-					currentValue[0]*yscale,
-					currentValue[2] );
-				i++;
-			}
-		};
+		var currentValue = null,
+			i=0;
+		this.bars = [];
+		while ( currentValue=this.iterator.next() ) {
+			this.bars.push( this.drawer.drawBar(
+				this.holder, 
+				x+i*xscale, 
+				y-currentValue[0]*yscale,
+				xscale,
+				currentValue[0]*yscale,
+				currentValue[2] )
+			);
+			i++;
+		}
+	};
 		
 	Graffi.Bar.prototype.drawer = {
-			drawBar: function( holder, x, y, w, h, color ) {
-				var returnv = holder.rect(x,y,w,h,5).attr({color:color,fill:color});
-				var cleanHeight = Math.max( h-2, 0 );
-				holder.rect( x+1, y+1, w/4-2, cleanHeight, 5).attr({stroke:'none',fill:'White',opacity:0.1});
-				holder.rect( x+3*w/4, y+1, w/4-2, cleanHeight, 5).attr({stroke:'none',fill:'Black',opacity:0.1});
-				return returnv;
-			}
+		drawBar: function( holder, x, y, w, h, color ) {
+			var returnv = holder.rect(x,y,w,h,5).attr({color:color,fill:color});
+			var cleanHeight = Math.max( h-2, 0 );
+			holder.rect( x+1, y+1, w/4-2, cleanHeight, 5).attr({stroke:'none',fill:'White',opacity:0.1});
+			holder.rect( x+3*w/4, y+1, w/4-2, cleanHeight, 5).attr({stroke:'none',fill:'Black',opacity:0.1});
+			return returnv;
+		},
+		highlight: function( bar ) {
+			bar.attr({
+				stroke: bar.attr('fill'),
+				'stroke-width': 8
+			})
+		},
+		unhighlight: function( bar ) {
+			bar.attr({
+				stroke: '#000',
+				'stroke-width': 1
+			})
+		}
 	};
 	
+	Graffi.Bar.prototype.highlight = function( id ) {
+		return this.drawer.highlight( this.bars[id] );
+	};
 	
-	
+	Graffi.Bar.prototype.unhighlight = function( id ) {
+		return this.drawer.unhighlight( this.bars[id] );
+	};
 	
 	
 	
