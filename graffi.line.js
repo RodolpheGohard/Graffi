@@ -210,7 +210,7 @@
 		this.iterator = iterator;
 		
 		this.width = holder.width-50;
-		this.height = holder.height-40;
+		this.height = holder.height-60;
 		
 		this.xMin = xmin;
         this.xMax = xmax;
