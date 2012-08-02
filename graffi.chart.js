@@ -168,16 +168,31 @@
 				.Z();
 			
 			//Grid Horizontals
+			var currentHtextPos;
+			var lastHtextPos = -10000;
+			var minHtextDelta = 21;
 			for (var i = 1; i < gridRows; i++) {
 				path.M( ox, Math.round(oy + h - i * gridRowHeight) )
 					.H( Math.round(ox + w) );
 				
-				this.holder.text(
-					ox-15,
-					Math.round(oy + h - i * gridRowHeight),
-					//(ymin + i*gridYStep).toFixed(2)
-					gradYFormatter( ymin + i*gridYStep )
-				).attr( gridAttributes );
+				currentHtextPos = oy + h - i * gridRowHeight;
+				if ( Math.abs(currentHtextPos - lastHtextPos) >= minHtextDelta ) {
+					var vtext = this.holder.text(
+							ox-15,
+							currentHtextPos,
+							gradYFormatter( ymin + i*gridYStep )
+						).attr( gridAttributes );
+					//fix the unrendered getBbox bug
+					vtext[0].firstChild.setAttribute( 'dy', '4.5' );
+					lastHtextPos = currentHtextPos;
+				}
+				
+//				this.holder.text(
+//					,
+//					Math.round(),
+//					//(ymin + i*gridYStep).toFixed(2)
+//					gradYFormatter( ymin + i*gridYStep )
+//				).attr( gridAttributes );
 			}
 			
 			
