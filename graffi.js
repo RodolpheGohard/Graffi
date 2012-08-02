@@ -78,6 +78,8 @@ THE SOFTWARE.
 			holder = Raphael( block, width, height );
 		} else if ( block.raphael) {
 			holder = block;
+			width = holder.width;
+			height = holder.height;
 		}
 		
 		//We try to guess how data is formed. An iterator over the dataset is generated.
