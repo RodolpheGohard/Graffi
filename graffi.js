@@ -82,6 +82,14 @@ THE SOFTWARE.
 			height = holder.height;
 		}
 		
+		if( window.GRAFFI_DEBUG ) {
+			holder.rect( 0,0,width,height,5 ).attr({
+				'stroke-width': 5,
+				'stroke':'red'
+			});
+			//console.log( 'graffi init. on '+width+' x '+height );
+		}
+		
 		//We try to guess how data is formed. An iterator over the dataset is generated.
 		if ( !data ) {
 			//what is it ??
