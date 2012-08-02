@@ -104,7 +104,7 @@
 			i++;
 		}
 		
-		this.drawer.drawLine( this.holder, points, color );
+		this.drawer.drawLine( this.holder, points, color, [x,y,x+w,y] );
 	};
 	
 	Graffi.Line.prototype.drawer = Graffi.Line.straightLineDrawer = {
