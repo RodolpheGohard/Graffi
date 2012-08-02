@@ -19,8 +19,8 @@
 		
 		var ymin = parameters.yMin || 0,
 			xmin = parameters.xMin || 0,
-			ymax = parameters.yMax || 10,
-			xmax = parameters.xMax || iterator.length,
+			ymax = parameters.yMax || iterator.max() || 10,
+			xmax = parameters.xMax || iterator.length || 10, //those "|| 10" prevent divisions by zero
 			xscale,
 			yscale;
 		
