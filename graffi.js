@@ -300,7 +300,7 @@ THE SOFTWARE.
 			
 			this.element.hover( function(event){
 				var re = _that.chart.tooltip[0].attr( {
-					width : 30 + contents.length*6,
+					width : 30 + contents.length*7,
 					height: 30
 //					x : -40-contents.length*5
 				} );
