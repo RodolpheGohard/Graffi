@@ -133,13 +133,15 @@
 			points,
 			color;
 	
+		this.bars = [];
 		//Looop the series
 		while ( currentSeries = this.iterator.next() ) {
 			is=0;
 			color = currentSeries.color;
+			this.bars[iv] = [];
 			//Loop values in current Series
 			while ( currentValue = currentSeries.iterator.next() ) {
-				this.drawer.drawBar(
+				this.bars[iv][is]=this.drawer.drawBar(
 					this.holder, 
 					x+is*xscale + iv*(xscale / this.iterator.length) + (xscale*0.333)*(this.iterator.length-iv)/this.iterator.length, //We shift the xoff by the size of a bar per previous series
 					y-currentValue[0]*yscale,
