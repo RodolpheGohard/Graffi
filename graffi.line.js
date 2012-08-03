@@ -19,8 +19,8 @@
 		
 		var ymin = parameters.yMin || 0,
 			xmin = parameters.xMin || 0,
-			ymax = parameters.yMax || 10,
-			xmax = parameters.xMax || iterator.length,
+			ymax = parameters.yMax || iterator.max() || 10,
+			xmax = parameters.xMax || iterator.length || 10, //those "|| 10" prevent divisions by zero
 			xscale,
 			yscale;
 		
@@ -28,7 +28,7 @@
 		this.iterator = iterator;
 		
 		this.width = holder.width-50;
-		this.height = holder.height-40;
+		this.height = holder.height-60;
 		
 		this.xMin = xmin;
 		this.xMax = xmax;
@@ -104,7 +104,7 @@
 			i++;
 		}
 		
-		this.drawer.drawLine( this.holder, points, color );
+		this.drawer.drawLine( this.holder, points, color, [x,y,x+w,y] );
 	};
 	
 	Graffi.Line.prototype.drawer = Graffi.Line.straightLineDrawer = {
@@ -154,7 +154,7 @@
 			if ( curvebounds )
 				path += 'L'+curvebounds[2]+' '+curvebounds[3];
 			
-			holder.path( path ).attr( {
+			return holder.path( path ).attr( {
 				stroke: color,
 				'stroke-width':2,
 				'stroke-linecap': 'round',
@@ -164,6 +164,18 @@
 			} );
 			
 			//path += 'L'+points[i][0]
+		},
+		
+		highlight: function( line ) {
+			line.attr({
+				'stroke-width': 8
+			});
+		},
+		
+		unhighlight: function( line ) {
+			line.attr({
+				'stroke-width': 2
+			})
 		}
 	};
 	Graffi.Line.TsmoothLineDrawer = {
@@ -210,7 +222,7 @@
 		this.iterator = iterator;
 		
 		this.width = holder.width-50;
-		this.height = holder.height-40;
+		this.height = holder.height-60;
 		
 		this.xMin = xmin;
         this.xMax = xmax;
@@ -236,7 +248,7 @@
 			iv=0,
 			points,
 			color;
-		
+		this.lines = [];
 		//Looop the series
 		while ( currentSeries = this.iterator.next() ) {
 			is=0;
@@ -248,9 +260,17 @@
 				is++;
 			}
 			//Draw current series
-			this.drawer.drawLine( this.holder, points, color, [x,y,x+w,y] );
+			this.lines.push( this.drawer.drawLine( this.holder, points, color, [x,y,x+w,y] ) );
 			iv++;
 		}
+	};
+	
+	Graffi.MultiLine.prototype.highlight = function( id ) {
+		return this.drawer.highlight( this.lines[id] );
+	};
+	
+	Graffi.MultiLine.prototype.unhighlight = function( id ) {
+		return this.drawer.unhighlight( this.lines[id] );
 	};
 	
 })();

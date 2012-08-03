@@ -78,6 +78,16 @@ THE SOFTWARE.
 			holder = Raphael( block, width, height );
 		} else if ( block.raphael) {
 			holder = block;
+			width = holder.width;
+			height = holder.height;
+		}
+		
+		if( window.GRAFFI_DEBUG ) {
+			holder.rect( 0,0,width,height,5 ).attr({
+				'stroke-width': 5,
+				'stroke':'red'
+			});
+			//console.log( 'graffi init. on '+width+' x '+height );
 		}
 		
 		//We try to guess how data is formed. An iterator over the dataset is generated.
@@ -290,7 +300,7 @@ THE SOFTWARE.
 			
 			this.element.hover( function(event){
 				var re = _that.chart.tooltip[0].attr( {
-					width : 30 + contents.length*6,
+					width : 30 + contents.length*7,
 					height: 30
 //					x : -40-contents.length*5
 				} );
@@ -508,8 +518,10 @@ THE SOFTWARE.
 		iterator.reset();
 		var series;
 		var li;
+		var i=0;
 		while( series = iterator.next() ) {
 			li = document.createElement('li');
+			li.setAttribute('data-graffi-oid',i);
 			ul.appendChild(li);
 			var square = document.createElement('span');
 			square.style.border = '1px solid #666';
@@ -522,6 +534,7 @@ THE SOFTWARE.
 			var label = document.createElement('span');
 			label.innerHTML = series.label || series[1];
 			li.appendChild(label);
+			i++;
 		}
 	};
 	Graffi.Legend.prototype = {

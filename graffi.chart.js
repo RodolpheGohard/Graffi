@@ -209,10 +209,10 @@
 				if ( currentVtextPos - lastVtextPos >= minVtextDelta ) {
 					path.V( Math.round(oy+h+4) );
 					var vtext = this.holder.text(
-							Math.round( currentVtextPos ),
-							oy + h + 10,
-							gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
-						).attr( gridAttributes );
+						Math.round( currentVtextPos ),
+						oy + h + 10,
+						gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
+					).attr( gridAttributes );
 					lastVtextPos = currentVtextPos;
 				} else {
 					

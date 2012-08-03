@@ -46,12 +46,12 @@
 		
 		//We compute and draw the relative shares
 		var amount;
+		this.slices = [];
 		for ( i=0,l=values.length ; i<l ; i++ ) {
 			shares[i] = values[i][0]/total;
 			amount = shares[i]*ratioToAngle;
-			this.renderer.drawSlice( this, currentAngle, amount, values[i][1], values[i][2] );
+			this.slices.push( this.renderer.drawSlice( this, currentAngle, amount, values[i][1], values[i][2] ) );
 			currentAngle -= amount;
-			
 		}
 		
 		
@@ -98,12 +98,33 @@
 		},
 		
 		drawFrame: function( pie ) {
-			pie.holder.circle( pie.ox, pie.oy, pie.r+6 ).attr( {
+			return pie.holder.circle( pie.ox, pie.oy, pie.r+6 ).attr( {
 				fill:'#446',
 				stroke:'#333',
 				'stroke-width': '5px'
 			} );
+		},
+		
+		highlight: function( slice ) {
+			slice.element.toFront();
+			slice.element.attr({
+				'stroke-width':6
+			});
+		},
+		
+		unhighlight: function( slice ) {
+			slice.element.attr({
+				'stroke-width':0
+			});
 		}
 	};
+	
+	Graffi.Pie.prototype.highlight = function( oid ) {
+		return this.renderer.highlight( this.slices[oid] );	
+	}
+	
+	Graffi.Pie.prototype.unhighlight = function( oid ) {
+		return this.renderer.unhighlight( this.slices[oid] );	
+	}
 	
 })();
