@@ -192,10 +192,10 @@
 				currentVtextPos = ox + i * gridColumnWidth;
 				if ( currentVtextPos - lastVtextPos >= minVtextDelta ) {
 					var vtext = this.holder.text(
-							Math.round( currentVtextPos ),
-							oy + h + 10,
-							gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
-						).attr( gridAttributes );
+						Math.round( currentVtextPos ),
+						oy + h + 10,
+						gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
+					).attr( gridAttributes );
 					lastVtextPos = currentVtextPos;
 				} else {
 					
