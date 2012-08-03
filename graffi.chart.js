@@ -177,6 +177,7 @@
 				
 				currentHtextPos = oy + h - i * gridRowHeight;
 				if ( Math.abs(currentHtextPos - lastHtextPos) >= minHtextDelta ) {
+					path.H( Math.round(ox-4) );
 					var vtext = this.holder.text(
 							ox-15,
 							currentHtextPos,
@@ -206,6 +207,7 @@
 				
 				currentVtextPos = ox + i * gridColumnWidth;
 				if ( currentVtextPos - lastVtextPos >= minVtextDelta ) {
+					path.V( Math.round(oy+h+4) );
 					var vtext = this.holder.text(
 							Math.round( currentVtextPos ),
 							oy + h + 10,
