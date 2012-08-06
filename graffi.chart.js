@@ -201,7 +201,7 @@
 			var currentVtextPos;
 			var lastVtextPos = -10000;
 			var minVtextDelta = 36;
-			for (var i = 1; i < gridColumns; i++) {
+			for (var i = 0; i <= gridColumns; i++) {
 				path.M( Math.round(ox + i * gridColumnWidth), oy )
 					.V( Math.round( oy + h ) );
 				
