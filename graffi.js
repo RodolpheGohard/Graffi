@@ -393,12 +393,24 @@ THE SOFTWARE.
 			this.str += ' M'+x+','+y;
 			return this;
 		},
+		m: function(x,y) {
+			this.str += ' m'+x+','+y;
+			return this;
+		},
 		L: function(x,y) {
 			this.str += ' L'+x+','+y;
 			return this;
 		},
+		l: function(x,y) {
+			this.str += ' l'+x+','+y;
+			return this;
+		},
 		A: function( rx, ry , angleDegrees, arcFlag, sweepFlag,x, y) {
 			this.str += ' A'+rx+','+ry	+' '+angleDegrees	+' '+(arcFlag?1:0)+','+(sweepFlag?1:0)+' '	+x+','+y;
+			return this;
+		},
+		a: function( rx, ry , angleDegrees, arcFlag, sweepFlag,x, y) {
+			this.str += ' a'+rx+','+ry	+' '+angleDegrees	+' '+(arcFlag?1:0)+','+(sweepFlag?1:0)+' '	+x+','+y;
 			return this;
 		},
 		Z: function() {
@@ -409,8 +421,16 @@ THE SOFTWARE.
 			this.str += ' H'+x;
 			return this;
 		},
+		h: function(x) {
+			this.str += ' h'+x;
+			return this;
+		},
 		V: function(y) {
 			this.str += ' V'+y;
+			return this;
+		},
+		v: function(y) {
+			this.str += ' v'+y;
 			return this;
 		},
 		C: function( x1,y1,x2,y2,x,y ) {
@@ -418,6 +438,14 @@ THE SOFTWARE.
 			this.str += ' C'+x1+','+y1+' '+x2+','+y2+' '+x+','+y;
 			for ( i=6,l=a.length ; i<l; i+=6 ) {
 				this.str += ' C'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3]+' '+a[i+4]+','+a[i+5];
+			}
+			return this;
+		},
+		c: function( x1,y1,x2,y2,x,y ) {
+			var i,l,a;
+			this.str += ' c'+x1+','+y1+' '+x2+','+y2+' '+x+','+y;
+			for ( i=6,l=a.length ; i<l; i+=6 ) {
+				this.str += ' c'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3]+' '+a[i+4]+','+a[i+5];
 			}
 			return this;
 		},
@@ -429,6 +457,14 @@ THE SOFTWARE.
 			}
 			return this;
 		},
+		s: function( x2,y2,x,y ) {
+			var i,l,a=arguments;
+			this.str += ' s'+x2+','+y2+' '+x+','+y;
+			for ( i=6,l=a.length ; i<l; i+=4 ) {
+				this.str += ' s'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
+			}
+			return this;
+		},
 		Q: function( x1,y1,x,y ) {
 			var i,l,a=arguments;
 			this.str += ' Q'+x1+','+y1+' '+x+','+y;
@@ -437,11 +473,27 @@ THE SOFTWARE.
 			}
 			return this;
 		},
+		q: function( x1,y1,x,y ) {
+			var i,l,a=arguments;
+			this.str += ' q'+x1+','+y1+' '+x+','+y;
+			for ( i=6,l=a.length ; i<l; i+=4 ) {
+				this.str += ' q'+a[i]+','+a[i+1]+' '+a[i+2]+','+a[i+3];
+			}
+			return this;
+		},
 		T: function( x,y ) {
 			var i,l,a=arguments;
 			this.str += ' T'+x+','+y;
 			for ( i=6,l=a.length ; i<l; i+=2 ) {
 				this.str += ' T'+a[i]+','+a[i+1];
+			}
+			return this;
+		},
+		t: function( x,y ) {
+			var i,l,a=arguments;
+			this.str += ' t'+x+','+y;
+			for ( i=6,l=a.length ; i<l; i+=2 ) {
+				this.str += ' t'+a[i]+','+a[i+1];
 			}
 			return this;
 		},
