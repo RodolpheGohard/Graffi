@@ -121,6 +121,8 @@ THE SOFTWARE.
 				return new Graffi.Bar( holder, iterator, parameters );
 			case 'pie':
 				return new Graffi.Pie( holder, iterator, parameters );
+			case 'meter':
+				return new Graffi.Meter( holder, iterator, parameters );
 
 		}
 	};
