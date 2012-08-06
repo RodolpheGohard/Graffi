@@ -222,7 +222,7 @@
 		this.iterator = iterator;
 		
 		this.width = holder.width-50;
-		this.height = holder.height-60;
+		this.height = holder.height-70; //the 70 leaves spaces for graduations like dates
 		
 		this.xMin = xmin;
         this.xMax = xmax;
