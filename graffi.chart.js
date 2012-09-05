@@ -187,13 +187,6 @@
 					vtext[0].firstChild.setAttribute( 'dy', '4.5' );
 					lastHtextPos = currentHtextPos;
 				}
-				
-//				this.holder.text(
-//					,
-//					Math.round(),
-//					//(ymin + i*gridYStep).toFixed(2)
-//					gradYFormatter( ymin + i*gridYStep )
-//				).attr( gridAttributes );
 			}
 			
 			
