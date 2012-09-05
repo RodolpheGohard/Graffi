@@ -31,7 +31,8 @@
 				l=data.length,
 				csv = '';
 			for ( ; i<l ; i++ ) {
-				csv += (labels?labels[i]+',':'') + '\n';
+				csv += data[i];
+				csv += ((labels&&labels[i])?labels[i]+',':'') + '\n';
 			}
 			return csv;
 		};
