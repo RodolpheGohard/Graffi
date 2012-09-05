@@ -98,7 +98,8 @@ THE SOFTWARE.
 			//it's an array
 			if ( data[0] !== undefined && data[0].constructor == Array ) {
 				//2D or more array
-				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data,parameters.labels );
+				iterator = Graffi.IteratorFactory.createMulti1DIteratorFrom2DArray( data,parameters.labels );			
+				if ( !parameters.chartType ) parameters.chartType = 'multiline';
 			} else {
 				//One series only
 				iterator = Graffi.IteratorFactory.create1DIteratorFrom1DArray( data,parameters.labels );
