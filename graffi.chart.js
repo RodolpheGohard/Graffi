@@ -176,7 +176,7 @@
 					.H( Math.round(ox + w) );
 				
 				currentHtextPos = oy + h - i * gridRowHeight;
-				if ( Math.abs(currentHtextPos - lastHtextPos) >= minHtextDelta ) {
+				if ( (options.drawGraduations!==false) && (Math.abs(currentHtextPos - lastHtextPos) >= minHtextDelta) ) {
 					path.H( Math.round(ox-4) );
 					var vtext = this.holder.text(
 							ox-15,
@@ -206,7 +206,7 @@
 					.V( Math.round( oy + h ) );
 				
 				currentVtextPos = ox + i * gridColumnWidth;
-				if ( currentVtextPos - lastVtextPos >= minVtextDelta ) {
+				if ( (options.drawGraduations!==false) && (currentVtextPos - lastVtextPos >= minVtextDelta) ) {
 					path.V( Math.round(oy+h+4) );
 					var vtext = this.holder.text(
 						Math.round( currentVtextPos ),
@@ -214,11 +214,8 @@
 						gradXFormatter( (xmin + i*gridXStep).toFixed(1) )
 					).attr( gridAttributes );
 					lastVtextPos = currentVtextPos;
-				} else {
-					
+					vtext.transform('t-20,20r-45');
 				}
-				
-				vtext.transform('t-20,20r-45');
 			}
 			
 			

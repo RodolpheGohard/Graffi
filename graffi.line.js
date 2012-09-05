@@ -28,7 +28,7 @@
 		this.iterator = iterator;
 		
 		this.width = holder.width-50;
-		this.height = holder.height-60;
+		this.height = holder.height-(parameters.drawGraduations===false?20:60);
 		
 		this.xMin = xmin;
 		this.xMax = xmax;
